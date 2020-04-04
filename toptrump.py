@@ -50,6 +50,7 @@ def opponent_stat_choice():
 
 
 def run():
+    print('Welcome to Pokemon Top Trumps! Best of three wins, good luck and may the odds be in your favour!')
     my_pokemon = find_pokemon()
     print('You have chosen {}'.format(my_pokemon['name']))
     opponent_pokemon = generate_random_pokemon()
@@ -68,15 +69,13 @@ def run():
         opponent_stat = opponent_pokemon[stat_choice]
         result_message = 'Your Pokemon\'s {} is {} and your opponent\'s {} is {}' \
             .format(stat_choice, my_stat, stat_choice, opponent_stat)
+        print(result_message)
 
         if my_stat > opponent_stat:
-            print(result_message)
             print('You win!')
         if my_stat < opponent_stat:
-            print(result_message)
             print('Sadly, you lose')
         if my_stat == opponent_stat:
-            print(result_message)
             print('It\'s a tie, let\'s try again')
             run()
     else:
@@ -86,15 +85,14 @@ def run():
         opponent_stat = opponent_pokemon[opponent_choice]
         result_message = 'Your Pokemon\'s {} is {} and your opponent\'s {} is {}' \
             .format(opponent_choice, my_stat, opponent_choice, opponent_stat)
+        print(result_message)
+
 
         if my_stat > opponent_stat:
-            print(result_message)
             print('You win!')
         if my_stat < opponent_stat:
-            print(result_message)
             print('Sadly, you lose')
         if my_stat == opponent_stat:
-            print(result_message)
             print('It\'s a tie, let\'s try again \n')
             run()
 
