@@ -32,10 +32,10 @@ def find_pokemon():
 
 
 def coin_toss():
-    flip = random.randint(1, 2)
-    if flip == 1:
+    flip = random.randint(0, 1)
+    if flip == 0:
         return 'heads'
-    if flip == 2:
+    if flip == 1:
         return 'tails'
 
 
@@ -54,12 +54,12 @@ def run():
     print('You have chosen {}'.format(my_pokemon['name']))
     opponent_pokemon = generate_random_pokemon()
     print('Your opponent\'s Pokemon is {}'.format(opponent_pokemon['name']))
-    my_coin_pick = input('This coin toss will determine if you can choose a stat or your opponent chooses, ' 
-                         'please choose: \n heads or \n tails \n')
+    my_coin_pick = str(input('This coin toss will determine if you can choose a stat or your opponent chooses, '
+                             'please choose: \n heads or \n tails \n'))
 
-    # if my_coin_pick != coin_toss() or my_coin_pick != coin_toss():
-    #     print('Oops there seems to be an error, let\'s try that again \n')
-    #     run()
+    if my_coin_pick != 'heads' and my_coin_pick != 'tails':
+        print('Oops there seems to be an error, let\'s try that again \n')
+        run()
 
     if my_coin_pick == coin_toss():
         stat_choice = input('You win the coin toss, which stat do you want to use? '
@@ -97,7 +97,6 @@ def run():
             print(result_message)
             print('It\'s a tie, let\'s try again \n')
             run()
-
 
 
 run()
