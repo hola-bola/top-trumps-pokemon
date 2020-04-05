@@ -9,7 +9,7 @@ def generate_random_pokemon():
     pokemon = res.json()
     return {
         'name': pokemon['name'],
-        'base_exp': pokemon['base_experience'],
+        'exp': pokemon['base_experience'],
         'height': pokemon['height'],
         'weight': pokemon['weight'],
     }
@@ -21,11 +21,14 @@ def find_pokemon():
     for x in range(3):
         random_pokemon = generate_random_pokemon()
         pokemon_data.append(random_pokemon)
-        print(random_pokemon['name'])
-    pokemon_choice = str(input('which one would you like to choose? \n'))
-    for data in pokemon_data:
-        if pokemon_choice in data.values():
-            return data
+        print((x+1), random_pokemon['name'])
+    pokemon_choice = str(input('Which one would you like to choose? Select a number... \n'))
+    if pokemon_choice == '1':
+        return pokemon_data[0]
+    if pokemon_choice == '2':
+        return pokemon_data[1]
+    if pokemon_choice == '3':
+        return pokemon_data[2]
     else:
         print('You have entered an incorrect value, let\'s try again \n')
         run()
@@ -42,11 +45,20 @@ def coin_toss():
 def opponent_stat_choice():
     choice = random.randint(0, 2)
     if choice == 0:
-        return 'base_exp'
+        return 'exp'
     if choice == 1:
         return 'height'
     if choice == 2:
         return 'weight'
+
+
+def finish_game():
+    end_choice = input('Would you like to play again? \n yes (y) or no (n) \n')
+    if end_choice == 'y' or end_choice == 'yes':
+        print('\n')
+        run()
+    else:
+        return
 
 
 def run():
@@ -64,7 +76,11 @@ def run():
 
     if my_coin_pick == coin_toss():
         stat_choice = input('You win the coin toss, which stat do you want to use? '
-                            'You can choose between: \n base_exp \n height \n weight \n')
+                            'You can choose between: '
+                            '\n exp (The base experience gained for defeating this Pokémon) '
+                            '\n height (The height of this Pokémon in decimetres) '
+                            '\n weight (The weight of this Pokémon in hectograms.) \n')
+
         my_stat = my_pokemon[stat_choice]
         opponent_stat = opponent_pokemon[stat_choice]
         result_message = 'Your Pokemon\'s {} is {} and your opponent\'s {} is {}' \
@@ -73,8 +89,10 @@ def run():
 
         if my_stat > opponent_stat:
             print('You win!')
+            finish_game()
         if my_stat < opponent_stat:
             print('Sadly, you lose')
+            finish_game()
         if my_stat == opponent_stat:
             print('It\'s a tie, let\'s try again')
             run()
@@ -87,11 +105,12 @@ def run():
             .format(opponent_choice, my_stat, opponent_choice, opponent_stat)
         print(result_message)
 
-
         if my_stat > opponent_stat:
             print('You win!')
+            finish_game()
         if my_stat < opponent_stat:
             print('Sadly, you lose')
+            finish_game()
         if my_stat == opponent_stat:
             print('It\'s a tie, let\'s try again \n')
             run()
